@@ -1,0 +1,35 @@
+---
+- name: Install development environment
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update apt
+      apt: update_cache=yes
+
+    - name: Install curl
+      apt: name=curl state=present
+
+    - name: Install wget
+      apt: name=wget state=present
+
+    - name: Install git
+      apt: name=git state=present
+
+    - name: Install zip
+      apt: name=zip state=present
+
+    - name: Install unzip
+      apt: name=unzip state=present
+
+    # - name: Install zsh package
+    #   apt:
+    #     name: zsh
+    #     state: present
+
+  roles:
+    - role: gantsign.oh-my-zsh
+      users:
+        - username: vagrant
+
+    - role: grzegorznowak.nvm_node
